@@ -7,4 +7,6 @@ class stabil {
 
   static final TextStyle mainStyle = GoogleFonts.quicksand(
       fontSize: 24, fontWeight: FontWeight.w700, color: mainColor);
+
+  static BorderRadius borderRadius = BorderRadius.circular(24);
 }
