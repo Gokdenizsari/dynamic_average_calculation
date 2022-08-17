@@ -1,4 +1,5 @@
 import 'package:dynamic_average_calculation/constants/app_constants.dart';
+import 'package:dynamic_average_calculation/widgets/show_average.dart';
 import 'package:flutter/material.dart';
 
 class CalculateAverage extends StatefulWidget {
@@ -35,7 +36,7 @@ class _CalculateAverageState extends State<CalculateAverage> {
               ),
               Expanded(
                 //flex:1 zaten otomatik 1 alıyor. yazmaya gerek yok
-                child: Text("Average"),
+                child: ShowAverage(lessonNumber: 0, average: 0),
               ),
             ],
           ),
