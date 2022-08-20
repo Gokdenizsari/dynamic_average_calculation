@@ -8,13 +8,16 @@ class stabil {
   static final TextStyle mainStyle = GoogleFonts.quicksand(
       fontSize: 24, fontWeight: FontWeight.w700, color: mainColor);
 
-static final TextStyle lessonStyle = GoogleFonts.quicksand(
+  static final TextStyle lessonStyle = GoogleFonts.quicksand(
       fontSize: 14, fontWeight: FontWeight.w500, color: mainColor);
 
-      static final TextStyle averageStyle = GoogleFonts.quicksand(
+  static final TextStyle averageStyle = GoogleFonts.quicksand(
       fontSize: 40, fontWeight: FontWeight.w800, color: mainColor);
-      static final TextStyle averageStyle2 = GoogleFonts.quicksand(
+  static final TextStyle averageStyle2 = GoogleFonts.quicksand(
       fontSize: 24, fontWeight: FontWeight.w700, color: mainColor);
 
   static BorderRadius borderRadius = BorderRadius.circular(24);
+
+  static final dropDownPadding =
+      EdgeInsets.symmetric(horizontal: 16, vertical: 8);
 }
