@@ -11,7 +11,7 @@ class CalculateAverage extends StatefulWidget {
 
 class _CalculateAverageState extends State<CalculateAverage> {
   var formKey = GlobalKey<FormState>();
-
+  double selectedValue = 4;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,10 +59,7 @@ class _CalculateAverageState extends State<CalculateAverage> {
           _buildTextFormField(),
           Row(
             children: [
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.add_moderator),
-              ),
+              _buildGrade(),
               IconButton(
                 onPressed: () {},
                 icon: Icon(Icons.snowboarding_rounded),
@@ -85,6 +82,43 @@ class _CalculateAverageState extends State<CalculateAverage> {
           border: OutlineInputBorder(borderRadius: stabil.borderRadius),
           filled: true,
           fillColor: stabil.mainColor.shade100.withOpacity(0.2)),
+    );
+  }
+
+  _buildGrade() {
+    return Container(
+      decoration: BoxDecoration(
+          color: stabil.mainColor.shade100.withOpacity(0.2),
+          borderRadius: stabil.borderRadius),
+      child: DropdownButton<double>(
+          value: 4,
+          onChanged: (deger) {
+            setState(() {
+              selectedValue = deger!;
+            });
+          },
+          items: [
+            DropdownMenuItem(
+              child: Text("AA"),
+              value: 4,
+            ),
+            DropdownMenuItem(
+              child: Text("BA"),
+              value: 3.5,
+            ),
+            DropdownMenuItem(
+              child: Text("BB"),
+              value: 3,
+            ),
+            DropdownMenuItem(
+              child: Text("CB"),
+              value: 2.5,
+            ),
+            DropdownMenuItem(
+              child: Text("CC"),
+              value: 2,
+            ),
+          ]),
     );
   }
 }
