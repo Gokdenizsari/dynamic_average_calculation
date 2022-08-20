@@ -1,4 +1,5 @@
 import 'package:dynamic_average_calculation/constants/app_constants.dart';
+import 'package:dynamic_average_calculation/helper/data_helper.dart';
 import 'package:dynamic_average_calculation/widgets/show_average.dart';
 import 'package:flutter/material.dart';
 
@@ -87,38 +88,23 @@ class _CalculateAverageState extends State<CalculateAverage> {
 
   _buildGrade() {
     return Container(
+      padding: stabil.dropDownPadding,
       decoration: BoxDecoration(
           color: stabil.mainColor.shade100.withOpacity(0.2),
           borderRadius: stabil.borderRadius),
       child: DropdownButton<double>(
-          value: 4,
-          onChanged: (deger) {
-            setState(() {
-              selectedValue = deger!;
-            });
-          },
-          items: [
-            DropdownMenuItem(
-              child: Text("AA"),
-              value: 4,
-            ),
-            DropdownMenuItem(
-              child: Text("BA"),
-              value: 3.5,
-            ),
-            DropdownMenuItem(
-              child: Text("BB"),
-              value: 3,
-            ),
-            DropdownMenuItem(
-              child: Text("CB"),
-              value: 2.5,
-            ),
-            DropdownMenuItem(
-              child: Text("CC"),
-              value: 2,
-            ),
-          ]),
+        value: selectedValue,
+        elevation: 16,
+        iconEnabledColor: stabil.mainColor.shade200,
+        onChanged: (value) {
+          setState(() {
+            selectedValue = value!;
+            print(value);
+          });
+        },
+        underline: Container(),
+        items: DataHelper.allLectureNotes(),
+      ),
     );
   }
 }
