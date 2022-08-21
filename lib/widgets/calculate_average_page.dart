@@ -64,24 +64,29 @@ class _CalculateAverageState extends State<CalculateAverage> {
           ),
           Row(
             children: [
-              Expanded(child: Padding(padding: stabil.horizontalPadding,
-              child: _buildGrade(),
+              Expanded(
+                child: Padding(
+                  padding: stabil.horizontalPadding,
+                  child: _buildGrade(),
+                ),
               ),
+              Expanded(
+                child: Padding(
+                  padding: stabil.horizontalPadding,
+                  child: _buildCredit(),
+                ),
               ),
-              Expanded(child: Padding(padding: stabil.horizontalPadding,
-              child: _buildCredit(),
-              ),
-              ),
-              
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.arrow_back_ios_rounded),
+                icon: Icon(Icons.arrow_back_ios_sharp),
                 color: stabil.mainColor,
                 iconSize: 25,
               ),
             ],
           ),
-          SizedBox(height: 4,),
+          SizedBox(
+            height: 4,
+          ),
         ],
       ),
     );
