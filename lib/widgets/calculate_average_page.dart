@@ -58,11 +58,21 @@ class _CalculateAverageState extends State<CalculateAverage> {
       key: formKey,
       child: Column(
         children: [
-          _buildTextFormField(),
+          Padding(
+            padding: stabil.horizontalPadding,
+            child: _buildTextFormField(),
+          ),
           Row(
             children: [
-              _buildGrade(),
-              _buildCredit(),
+              Expanded(child: Padding(padding: stabil.horizontalPadding,
+              child: _buildGrade(),
+              ),
+              ),
+              Expanded(child: Padding(padding: stabil.horizontalPadding,
+              child: _buildCredit(),
+              ),
+              ),
+              
               IconButton(
                 onPressed: () {},
                 icon: Icon(Icons.arrow_back_ios_rounded),
