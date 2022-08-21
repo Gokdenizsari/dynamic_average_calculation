@@ -1,5 +1,6 @@
 import 'package:dynamic_average_calculation/constants/app_constants.dart';
 import 'package:dynamic_average_calculation/helper/data_helper.dart';
+import 'package:dynamic_average_calculation/model/lesson.dart';
 import 'package:dynamic_average_calculation/widgets/show_average.dart';
 import 'package:flutter/material.dart';
 
@@ -12,8 +13,11 @@ class CalculateAverage extends StatefulWidget {
 
 class _CalculateAverageState extends State<CalculateAverage> {
   var formKey = GlobalKey<FormState>();
+  double selected = 1;
+  double credi = 1;
   double selectedValue = 4;
   double selectedCredit = 1;
+  String selectedLessonName = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +42,9 @@ class _CalculateAverageState extends State<CalculateAverage> {
               ),
               Expanded(
                 //flex:1 zaten otomatik 1 alıyor. yazmaya gerek yok
-                child: ShowAverage(lessonNumber: 0, average: 0),
+                child: ShowAverage(
+                    lessonNumber: DataHelper.allAddLesson.length,
+                    average: DataHelper.calculateAverage()),
               ),
             ],
           ),
@@ -77,7 +83,7 @@ class _CalculateAverageState extends State<CalculateAverage> {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: _addLessonAndCalculateAverage,
                 icon: Icon(Icons.arrow_back_ios_sharp),
                 color: stabil.mainColor,
                 iconSize: 25,
@@ -94,38 +100,78 @@ class _CalculateAverageState extends State<CalculateAverage> {
 
   Widget _buildTextFormField() {
     return TextFormField(
+      onSaved: (value) {
+        selectedLessonName = value!;
+      },
+      validator: (g) {
+        if (g!.length <= 0) {
+          return 'Please Enter The Lesson Name';
+        } else
+          return null;
+      },
       decoration: InputDecoration(
-          hintText: " ",
-          border: OutlineInputBorder(borderRadius: stabil.borderRadius),
+          hintText: 'Criminal Law',
+          border: OutlineInputBorder(
+            borderRadius: stabil.borderRadius,
+            borderSide: BorderSide(
+              width: 0,
+              style: BorderStyle.none,
+            ),
+          ),
           filled: true,
-          fillColor: stabil.mainColor.shade100.withOpacity(0.2)),
+          fillColor: stabil.mainColor.shade100.withOpacity(0.3)),
     );
   }
 
-  _buildGrade() {
+  Widget _buildGrade() {
     return Container(
-      padding: stabil.dropDownPadding,
+      alignment: Alignment.center,
       decoration: BoxDecoration(
-          color: stabil.mainColor.shade100.withOpacity(0.2),
-          borderRadius: stabil.borderRadius),
+        color: stabil.mainColor.shade100.withOpacity(0.3),
+        borderRadius: BorderRadius.circular(24),
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: DropdownButton<double>(
-        value: selectedValue,
-        elevation: 16,
         iconEnabledColor: stabil.mainColor.shade200,
-        onChanged: (value) {
+        elevation: 16,
+        items: DataHelper.allLectureNotes(),
+        underline: Container(),
+        onChanged: (BA) {
           setState(() {
-            selectedCredit = value!;
-            print(value);
+            selected = BA!;
+            print(BA);
           });
         },
-        underline: Container(),
-        items: DataHelper.allLectureNotes(),
+        value: selected,
       ),
     );
   }
 
   _buildCredit() {
     return Container(
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: stabil.mainColor.shade100.withOpacity(0.4),
+        borderRadius: BorderRadius.circular(24),
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: DropdownButton<double>(
+        iconEnabledColor: stabil.mainColor.shade200,
+        elevation: 16,
+        items: DataHelper.allLessonCredit(),
+        underline: Container(),
+        onChanged: (AA) {
+          setState(() {
+            credi = AA!;
+            print(AA);
+          });
+        },
+        value: credi,
+      ),
+    );
+  }
+
+  /* return Container(
       padding: stabil.dropDownPadding,
       decoration: BoxDecoration(
           color: stabil.mainColor.shade100.withOpacity(0.2),
@@ -134,15 +180,27 @@ class _CalculateAverageState extends State<CalculateAverage> {
         value: selectedCredit,
         elevation: 16,
         iconEnabledColor: stabil.mainColor.shade200,
-        onChanged: (value) {
+        onChanged: (value2) {
           setState(() {
-            selectedValue = value!;
-            print(value);
+            selectedValue = value2!;
           });
         },
         underline: Container(),
         items: DataHelper.allLessonCredit(),
       ),
     );
+  }*/
+
+  void _addLessonAndCalculateAverage() {
+    formKey.currentState!.save();
+
+    if (formKey.currentState!.validate()) {
+      var addLesson = Lesson(
+          id: selectedLessonName,
+          letterValue: selectedValue,
+          creditValue: selectedCredit);
+      DataHelper.addLesson(addLesson);
+      setState(() {});
+    }
   }
 }
