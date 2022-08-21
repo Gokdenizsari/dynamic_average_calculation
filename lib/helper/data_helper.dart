@@ -1,6 +1,25 @@
+import 'package:dynamic_average_calculation/model/lesson.dart';
 import 'package:flutter/material.dart';
 
 class DataHelper {
+  static List<Lesson> allAddLesson = [];
+
+  static addLesson(Lesson lesson) {
+    allAddLesson.add(lesson);
+  }
+
+  static calculateAverage() {
+    double totalGrade = 0;
+    double totalCredi = 0;
+
+    allAddLesson.forEach((element) {
+      totalGrade = totalGrade + (element.creditValue + element.letterValue);
+      totalCredi += element.creditValue;
+    });
+
+    return totalGrade / totalGrade;
+  }
+
   static List<String> _allLectureNotes() {
     return ['AA', 'BA', 'BB', 'CB', 'CC', 'DC', 'DD', 'FD', 'FF'];
   }
