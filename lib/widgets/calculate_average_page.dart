@@ -13,6 +13,7 @@ class CalculateAverage extends StatefulWidget {
 class _CalculateAverageState extends State<CalculateAverage> {
   var formKey = GlobalKey<FormState>();
   double selectedValue = 4;
+  double selectedCredit = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,16 +62,16 @@ class _CalculateAverageState extends State<CalculateAverage> {
           Row(
             children: [
               _buildGrade(),
+              _buildCredit(),
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.snowboarding_rounded),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.ac_unit),
+                icon: Icon(Icons.arrow_back_ios_rounded),
+                color: stabil.mainColor,
+                iconSize: 25,
               ),
             ],
-          )
+          ),
+          SizedBox(height: 4,),
         ],
       ),
     );
@@ -98,12 +99,34 @@ class _CalculateAverageState extends State<CalculateAverage> {
         iconEnabledColor: stabil.mainColor.shade200,
         onChanged: (value) {
           setState(() {
-            selectedValue = value!;
+            selectedCredit = value!;
             print(value);
           });
         },
         underline: Container(),
         items: DataHelper.allLectureNotes(),
+      ),
+    );
+  }
+
+  _buildCredit() {
+    return Container(
+      padding: stabil.dropDownPadding,
+      decoration: BoxDecoration(
+          color: stabil.mainColor.shade100.withOpacity(0.2),
+          borderRadius: stabil.borderRadius),
+      child: DropdownButton<double>(
+        value: selectedCredit,
+        elevation: 16,
+        iconEnabledColor: stabil.mainColor.shade200,
+        onChanged: (value) {
+          setState(() {
+            selectedValue = value!;
+            print(value);
+          });
+        },
+        underline: Container(),
+        items: DataHelper.allLessonCredit(),
       ),
     );
   }
