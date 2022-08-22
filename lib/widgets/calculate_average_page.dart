@@ -51,7 +51,14 @@ class _CalculateAverageState extends State<CalculateAverage> {
             ],
           ),
           Expanded(
-            child:LessonList(),
+            child: LessonList(
+              onDismiss: (index) {
+                DataHelper.allAddLesson.removeAt(index);
+                setState(() {
+                  
+                });
+              },
+            ),
           ),
         ],
       ),
