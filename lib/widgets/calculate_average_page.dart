@@ -1,5 +1,6 @@
 import 'package:dynamic_average_calculation/constants/app_constants.dart';
 import 'package:dynamic_average_calculation/helper/data_helper.dart';
+import 'package:dynamic_average_calculation/lesson_list/lesson_list.dart';
 import 'package:dynamic_average_calculation/model/lesson.dart';
 import 'package:dynamic_average_calculation/widgets/show_average.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class _CalculateAverageState extends State<CalculateAverage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.pink.shade500,
@@ -49,10 +51,7 @@ class _CalculateAverageState extends State<CalculateAverage> {
             ],
           ),
           Expanded(
-            child: Container(
-              child: Text("List"),
-              color: Colors.red.shade400,
-            ),
+            child:LessonList(),
           ),
         ],
       ),
